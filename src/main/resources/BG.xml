@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+
+
+    <!--指定数据库连接属性文件-->
+    <properties resource="jdbc.properties"/>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!--去掉注释-->
+        <commentGenerator >
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--连接数据库-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--指定pojo生成位置,targetProject为你项目指定的根路径，即src/main/java或src/main/resources-->
+        <javaModelGenerator targetPackage="com.pojo2" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--指定mapper.xml生成位置-->
+        <sqlMapGenerator targetPackage="mappers2"  targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!--指定mapper.java生成位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.dao2"  targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+       <!-- &lt;!&ndash;tableName：需要用的表名，domainObjectName：pojo的类名&ndash;&gt;
+        <table tableName="article" domainObjectName="Article" >
+            &lt;!&ndash;false表示不使用实际列名做属性名，会做驼峰转换&ndash;&gt;
+            <property name="useActualColumnNames" value="false"/>
+            &lt;!&ndash;指明主键，生成的sql在插入时会添加<selectKey>相关语句以便能获取最新插入的key&ndash;&gt;
+            <generatedKey column="aid" sqlStatement="Mysql" identity="true" />
+            &lt;!&ndash;对某一列个性化(固定名，指定jdbc类型)&ndash;&gt;&lt;!&ndash;content在数据库为text类型,可以改变jdbc类型为varchar&ndash;&gt;
+            &lt;!&ndash;<columnOverride column="content" property="content" jdbcType="VARCHAR"/>&ndash;&gt;
+            &lt;!&ndash;忽略表的某一列，不生成任何东西&ndash;&gt;
+            &lt;!&ndash;<ignoreColumn column="DATE_FIELD" />&ndash;&gt;
+        </table>
+        <table tableName="category" domainObjectName="Category" >
+        <property name="useActualColumnNames" value="false"/>
+        <generatedKey column="cid" sqlStatement="Mysql" identity="true" />
+    </table>
+        <table tableName="reply" domainObjectName="Reply" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="rid" sqlStatement="Mysql" identity="true" />
+        </table>
+
+        <table tableName="comment" domainObjectName="Comment" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="coid" sqlStatement="Mysql" identity="true" />
+        </table>-->
+        <table tableName="user" domainObjectName="User" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="uid" sqlStatement="Mysql" identity="true" />
+        </table>
+    </context>
+</generatorConfiguration>

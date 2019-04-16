@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.CommentMapper">
+  <resultMap id="BaseResultMap" type="com.pojo.Comment">
+    <id column="coid" jdbcType="INTEGER" property="coid" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    coid, content, create_time, aid, uid
+  </sql>
+  <select id="selectByExample" parameterType="com.pojo.CommentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from comment
+    where coid = #{coid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from comment
+    where coid = #{coid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pojo.CommentExample">
+    delete from comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Comment">
+    <selectKey keyProperty="coid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into comment (content, create_time, aid, 
+      uid)
+    values (#{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{aid,jdbcType=INTEGER}, 
+      #{uid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Comment">
+    <selectKey keyProperty="coid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="content != null">
+        content,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="aid != null">
+        aid,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aid != null">
+        #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pojo.CommentExample" resultType="java.lang.Long">
+    select count(*) from comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update comment
+    <set>
+      <if test="record.coid != null">
+        coid = #{record.coid,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.aid != null">
+        aid = #{record.aid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null">
+        uid = #{record.uid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update comment
+    set coid = #{record.coid,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      aid = #{record.aid,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Comment">
+    update comment
+    <set>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aid != null">
+        aid = #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where coid = #{coid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Comment">
+    update comment
+    set content = #{content,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      aid = #{aid,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER}
+    where coid = #{coid,jdbcType=INTEGER}
+  </update>
+  <!--plus-->
+    <select id="selectByAidWithReply" resultMap="selectByAidWithReplyMap" parameterType="java.lang.Integer">
+        select c.coid ccoid,c.content ccontent,c.uid cuid,c.aid caid,c.create_time ccreate_time,uc.username ucusername,uc.photo ucphoto,
+                r.rid rrid,r.pcoid rpcoid,r.content rcontent,r.create_time rcreate_time,
+                r.uid ruid,r.type rtype,r.to_uid rto_uid,ur.username urusername,ur.photo urphoto
+        from comment c
+        left join user uc on uc.uid=c.uid
+        left join reply r on r.pcoid=c.coid
+        left join user ur on ur.uid=r.uid
+        where c.aid=#{aid}
+
+    </select>
+    <resultMap id="selectByAidWithReplyMap" type="com.pojo.Comment">
+        <id column="ccoid" jdbcType="INTEGER" property="coid" />
+        <result column="ccontent" jdbcType="VARCHAR" property="content" />
+        <result column="ccreate_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="caid" jdbcType="INTEGER" property="aid" />
+        <result column="cuid" jdbcType="INTEGER" property="uid" />
+        <result column="ucusername" jdbcType="VARCHAR" property="userName" />
+        <result column="ucphoto" jdbcType="VARCHAR" property="userPhoto" />
+        <collection property="replyList" ofType="com.pojo.Reply">
+            <id column="rrid" jdbcType="INTEGER" property="rid" />
+            <result column="rpcoid" jdbcType="INTEGER" property="pcoid" />
+            <result column="rcreate_time" jdbcType="TIMESTAMP" property="createTime" />
+            <result column="rcontent" jdbcType="VARCHAR" property="content" />
+            <result column="ruid" jdbcType="INTEGER" property="uid" />
+            <result column="rtype" jdbcType="CHAR" property="type" />
+            <result column="rto_uid" jdbcType="INTEGER" property="toUid" />
+            <result column="urusername" jdbcType="VARCHAR" property="userName" />
+            <result column="urphoto" jdbcType="VARCHAR" property="userPhoto" />
+        </collection>
+    </resultMap>
+    <select id="selectCommentByAidSimple" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select coid from comment where aid=#{aid}
+    </select>
+    <select id="selectAllCommentNoReply" resultMap="selectAllCommentNoReplyMap">
+         select c.coid ccoid,c.content ccontent,c.uid cuid,c.aid caid,c.create_time ccreate_time,
+         uc.username ucusername,a.title atitle
+        from comment c
+        inner join user uc on uc.uid=c.uid
+        inner join article a on a.aid=c.aid
+
+    </select>
+    <resultMap id="selectAllCommentNoReplyMap" type="com.pojo.Comment">
+        <id column="ccoid" jdbcType="INTEGER" property="coid" />
+        <result column="ccontent" jdbcType="VARCHAR" property="content" />
+        <result column="ccreate_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="caid" jdbcType="INTEGER" property="aid" />
+        <result column="cuid" jdbcType="INTEGER" property="uid" />
+        <result column="ucusername" jdbcType="VARCHAR" property="userName" />
+        <result column="atitle" jdbcType="VARCHAR" property="articleTitle" />
+    </resultMap>
+</mapper>

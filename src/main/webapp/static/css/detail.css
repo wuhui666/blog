@@ -1,0 +1,26 @@
+.title{
+    text-align: center;
+}
+#articleInfoList li{
+    display: inline;
+}
+#shareList li{
+    display: inline;
+}
+#shareList li img{
+    height: 30px;
+    width: 30px;
+}
+
+.reply-ul li{
+    border-bottom:solid 2px gainsboro;
+    list-style: none;
+}
+
+hr{
+    margin: 0 0px;
+}
+/*隐藏编辑器power by froala*/
+.article-content p:last-child{
+    display: none;
+}

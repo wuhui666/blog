@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.CategoryMapper">
+  <resultMap id="BaseResultMap" type="com.pojo.Category">
+    <id column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="cname" jdbcType="VARCHAR" property="cname" />
+    <result column="c_icon" jdbcType="VARCHAR" property="cIcon" />
+    <result column="pcid" jdbcType="INTEGER" property="pcid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    cid, cname, c_icon, pcid
+  </sql>
+  <select id="selectByExample" parameterType="com.pojo.CategoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from category
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from category
+    where cid = #{cid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pojo.CategoryExample">
+    delete from category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Category">
+    <selectKey keyProperty="cid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into category (cname, c_icon, pcid
+      )
+    values (#{cname,jdbcType=VARCHAR}, #{cIcon,jdbcType=VARCHAR}, #{pcid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Category">
+    <selectKey keyProperty="cid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cname != null">
+        cname,
+      </if>
+      <if test="cIcon != null">
+        c_icon,
+      </if>
+      <if test="pcid != null">
+        pcid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cname != null">
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="cIcon != null">
+        #{cIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="pcid != null">
+        #{pcid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pojo.CategoryExample" resultType="java.lang.Long">
+    select count(*) from category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update category
+    <set>
+      <if test="record.cid != null">
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cname != null">
+        cname = #{record.cname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cIcon != null">
+        c_icon = #{record.cIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcid != null">
+        pcid = #{record.pcid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update category
+    set cid = #{record.cid,jdbcType=INTEGER},
+      cname = #{record.cname,jdbcType=VARCHAR},
+      c_icon = #{record.cIcon,jdbcType=VARCHAR},
+      pcid = #{record.pcid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Category">
+    update category
+    <set>
+      <if test="cname != null">
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="cIcon != null">
+        c_icon = #{cIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="pcid != null">
+        pcid = #{pcid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Category">
+    update category
+    set cname = #{cname,jdbcType=VARCHAR},
+      c_icon = #{cIcon,jdbcType=VARCHAR},
+      pcid = #{pcid,jdbcType=INTEGER}
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  <select id="selectAllCategoryWithSon" resultMap="BaseResultMapWithSon">
+     select c1.cid c1id,c1.cname c1name,c1.c_icon c1_icon,c1.pcid pc1id,
+            c2.cid c2id,c2.cname c2name,c2.c_icon c2_icon,c2.pcid pc2id,
+            c3.cid c3id,c3.cname c3name,c3.c_icon c3_icon,c3.pcid pc3id
+    from category c1
+    left join category c2 on c1.cid=c2.pcid and c1.pcid!=c2.cid
+    left join category c3 on c2.cid=c3.pcid
+    order by c1.cid
+  </select>
+    <resultMap id="BaseResultMapWithSon" type="com.pojo.Category">
+        <id column="c1id" jdbcType="INTEGER" property="cid" />
+        <result column="c1name" jdbcType="VARCHAR" property="cname" />
+        <result column="c1_icon" jdbcType="VARCHAR" property="cIcon" />
+        <result column="pc1id" jdbcType="INTEGER" property="pcid" />
+        <collection property="childList" ofType="com.pojo.Category">
+            <id column="c2id" jdbcType="INTEGER" property="cid" />
+            <result column="c2name" jdbcType="VARCHAR" property="cname" />
+            <result column="c2_icon" jdbcType="VARCHAR" property="cIcon" />
+            <result column="pc2id" jdbcType="INTEGER" property="pcid" />
+            <collection property="childList" ofType="com.pojo.Category">
+                <id column="c3id" jdbcType="INTEGER" property="cid" />
+                <result column="c3name" jdbcType="VARCHAR" property="cname" />
+                <result column="c3_icon" jdbcType="VARCHAR" property="cIcon" />
+                <result column="pc3id" jdbcType="INTEGER" property="pcid" />
+            </collection>
+        </collection>
+    </resultMap>
+  <select id="selectCategoryAsParent" resultMap="selectCategoryAsParentMap">
+    select cid,cname
+    from category
+    where cid=pcid or pcid in (
+          select cid from category where cid=pcid
+    )
+  </select>
+  <resultMap id="selectCategoryAsParentMap" type="com.pojo.Category">
+    <id column="cid" property="cid"/>
+    <result column="cname" property="cname"/>
+  </resultMap>
+</mapper>

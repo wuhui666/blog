@@ -1,0 +1,12 @@
+#alert-div{
+    margin-top: 70px;
+    position: fixed;
+    z-index: 99999;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+    border: solid 2px ghostwhite;
+    background-color: lightblue;
+    padding: 15 5px;
+    display: none;
+}

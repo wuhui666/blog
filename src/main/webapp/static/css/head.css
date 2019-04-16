@@ -1,0 +1,51 @@
+
+#mainContainer{
+    width: 1230px;
+    height: 1150px;
+}
+.menuLi{
+    width: 16%;
+    text-align: center;
+
+}
+.menuLi>a{
+    font-size: large;
+    font-style: italic;
+}
+.menuLi a:hover{
+    color:red;
+}
+.menuLi ul{
+    display: none;
+    position:absolute;
+    z-index:998;
+    list-style-type: none;
+    text-align: center;
+    background-color:#f8f8f8;
+    width: 118.5px;
+    padding-left: 0px;
+
+}
+.menuLi ul>li{
+    height: 40px;
+    font-size: larger;
+    padding-top: 10px;
+    position: relative;/*使得子元素可以参照*/
+}
+.menuLi ul>li a{
+    text-decoration: none;
+}
+.menuLi ul>li ul{
+    left: 118.5px;/*相对 .menuLi ul>li*/
+    top:0px;
+}
+.menuLi ul li ul li{
+    padding-top: 5px;
+}
+.menuLi>ul li>ul li a{
+    font-size:medium;
+}
+#headPicture img{
+    width: 50px;
+    height: 50px;
+}
