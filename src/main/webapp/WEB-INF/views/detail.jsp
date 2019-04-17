@@ -37,9 +37,12 @@
 
                     </div>
                     <%--文章详情--%>
-                    <div class="article-content" style="font-size:larger">
-                        ${currentArticle.content}
-                    </div>
+
+                        <div class="article-content" style="font-size:larger;padding-left: 100px">
+                            ${currentArticle.content}
+                        </div>
+
+
                     <div class="row">
                         <div class="col-md-2" style="padding-top: 5px">
                             <p>分类：${currentArticle.categoryName}</p>

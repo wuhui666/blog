@@ -43,12 +43,12 @@
 
     <div class="col-md-12" style="padding: 0 0px">
         <div class="col-md-9" style="padding-right: 0px;padding-left: 0px">
-        <textarea id="editor">
+        <div id="editor">
             <c:if test="${editArticle!=null}">
                 ${editArticle.content}
             </c:if>
 
-        </textarea>
+        </div>
             <%-- <button id="bt">edwsfsf</button>--%>
         </div>
         <div class="col-md-3">
@@ -289,12 +289,17 @@
     $("#addbutton").click(function () {
 
         if (checkInput()) {
+            var content=$('#editor').froalaEditor('html.get', true);
+
+            //截掉“power by ....”
+            var index=content.indexOf("<p data-f-id");
+            content=content.substring(0,index);
             var jsonObj={
                 "aid":"${editArticle.aid}",/*如果null编辑提交，不为null新增提交*/
                 "title":$("#title").val(),
                 "cid":$("#categorySelect").val(),
                 "uid":"${currentUser.uid}",
-                "content":$('#editor').froalaEditor('html.get', true)
+                "content":content,
             };
             $.ajax({
                 type:"post",

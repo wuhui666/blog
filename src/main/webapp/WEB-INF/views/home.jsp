@@ -86,36 +86,36 @@
                                             ${a.title}
                                     </a>
                                     <a class="articleAbstract" href="article/${a.aid}">
-                                        <p>
-                                            <%--会自带power by froala，delete "power by froala" and 空格--%>
-                                            <c:set var="real_content" value="${fn:trim(fn:substringBefore(a.content,'<p data-f-id' ))}"/>
+
+
+                                            <c:set var="real_content" value="${fn:trim(a.content)}"/>
                                             <c:if test="${fn:contains(real_content,'<img' )}">
                                                 <c:set var="content" value="${fn:substringBefore(real_content, '<img')}"/>
 
                                                 <%--第一张图片之前文字--%>
-                                                <c:if test="${fn:length(content)>70}">
-                                                    ${fn:substring(content,0,70)}...
+                                                <c:if test="${fn:length(content)>100}">
+                                                    ${fn:substring(content,0,100)}...
 
                                                 </c:if>
-                                                <c:if test="${fn:length(content)<=70}">
+                                                <c:if test="${fn:length(content)<=100}">
                                                     ${content}...
                                                 </c:if>
                                             </c:if>
                                             <c:if test="${fn:contains(real_content,'<img' )==false}">
 
-                                                <c:if test="${fn:length(real_content)>70}">
-                                                    ${fn:substring(real_content,0,70)}...
+                                                <c:if test="${fn:length(real_content)>100}">
+                                                    ${fn:substring(real_content,0,100)}...
                                                 </c:if>
-                                                <c:if test="${fn:length(real_content)<=70}">
+                                                <c:if test="${fn:length(real_content)<=100}">
                                                     ${real_content}...
                                                 </c:if>
                                             </c:if>
 
-                                        </p>
+
                                     </a>
 
                                 </div>
-                                <div class="articleMeta">
+                                <div class="articleMeta" style="">
                                     <p>
                                         <span class="glyphicon glyphicon-eye-open"></span>
                                         <span style="margin-left: auto" class="count">${a.viewCount}</span>

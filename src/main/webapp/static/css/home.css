@@ -46,6 +46,7 @@
     font-style:italic ;
     color: #adadad;
     text-decoration: none;
+
 }
 .articleInfo .articleAbstract :first-letter{
     font-size: larger;
@@ -54,10 +55,13 @@
     color: black;
 
 }
+.articleInfo .articleAbstract p{
+    margin-bottom: 0px;
+}
 .articleMeta{
     position: absolute;
     left: 0px;
-    top: 115px;
+    top:125px;
 }
 
 .articleMeta p{

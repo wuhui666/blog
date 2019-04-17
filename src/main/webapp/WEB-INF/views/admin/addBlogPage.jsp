@@ -117,11 +117,11 @@
     <div class="col-md-10" style="padding: 0 0px;">
         <div class="row">
             <div class="col-sm-9" style="padding-right: 0px;padding-left: 0px;margin-right: 0px">
-        <textarea id="editor">
+        <div id="editor">
             <c:if test="${editArticle!=null}">
                 ${editArticle.content}
             </c:if>
-        </textarea>
+        </div>
             </div>
             <div class="col-sm-3">
                 <h2>博客保存</h2>
@@ -390,6 +390,10 @@
 
     }
     $("#addbutton").click(function () {
+        var content=$('#editor').froalaEditor('html.get', false);
+        //截掉“power by ....”
+        var index=content.indexOf("<p data-f-id");
+        content=content.substring(0,index);
 
         if (checkInput()) {
             var jsonObj={
@@ -397,7 +401,7 @@
                 "title":$("#title").val(),
                 "cid":$("#categorySelect").val(),
                 "uid":"${currentUser.uid}",
-                "content":$('#editor').froalaEditor('html.get', true)
+                "content":content,
             };
             $.ajax({
                 type:"post",
