@@ -25,18 +25,18 @@
         <br />
 
 
-        <div class="row" style="margin-left: 500px;margin-right: 500px">
+        <div class="row" style="margin-left: 38%;margin-right: 38%">
 
             <form class="form-horizontal">
                 <div class="form-group">
-                    <label for="email" class="col-sm-3 control-label">Email</label>
-                    <div class="col-sm-9">
+                    <label for="email" class="col-md-3 col-xs-3 control-label">Email</label>
+                    <div class="col-md-9 col-xs-9">
                         <input name="email" type="email" class="form-control" id="email" placeholder="Email">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="password" class="col-sm-3 control-label">Password</label>
-                    <div class="col-sm-9">
+                    <label for="password" class="col-md-3 col-xs-3 control-label">Password</label>
+                    <div class="col-md-9 col-xs-9">
                         <input name="password" type="password" class="form-control" id="password" placeholder="Password">
 
                     </div>

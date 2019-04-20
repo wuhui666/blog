@@ -16,14 +16,14 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
+        <div class="navbar-header" style="margin-right: 5%">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" style="display: inline-block;margin-left: 60px;padding-top: 0px">
+            <a class="navbar-brand" href="#" style="display: inline-block;margin-left:10%;padding:0 0px;width: 100%" id="fade-toggle">
                 <span style="font-size: x-large">Wuhui's blog</span><br/>
                 <span>The future always changes...</span>
             </a>
@@ -36,12 +36,12 @@
                     <c:if test="${c.cid==c.pcid}">
                         <li class="menuLi">
                             <a href="category-articles/${c.cid}/1">${c.cname}</a>
-                            <ul>
+                            <ul style="width: 100%">
                                 <c:if test="${c.childList!=null}">
                                     <c:forEach items="${c.childList}" var="cc">
                                         <li>
                                             <a href="category-articles/${cc.cid}/1">${cc.cname}</a>
-                                            <ul>
+                                            <ul style="left: 100%">
                                                 <c:if test="${cc.childList!=null}">
                                                     <c:forEach items="${cc.childList}" var="ccc">
                                                         <li>
@@ -58,16 +58,16 @@
                     </c:if>
                 </c:forEach>
 
-                <li class="menuLi">
+                <li class="menuLi" style="width: 18%">
                     <c:if test="${currentUser!=null}">
-                        <div id="headPicture" class="col-md-6" style="padding:0 0px;text-align: center">
+                        <div id="headPicture" class="col-md-6 col-xs-6 " style="padding:0 0px;text-align: center">
                             <img src="${currentUser.photo}" alt="..." class="img-circle">
                         </div>
-                        <div class="col-md-6" style="padding:0 0px">
+                        <div class="col-md-6 col-xs-6" style="padding:0 0px">
                             <p style="font-size: medium;">${currentUser.username}</p>
                             <span>个人中心</span>
                         </div>
-                        <ul style="top: 53px;">
+                        <ul style="top: 53px;width: 100%">
                             <li><a href="user/editPage">修改资料</a></li>
                             <li><a class="keepUrlAfterLogin">退出登录</a></li>
                         </ul>
@@ -85,25 +85,21 @@
     </div><!-- /.container-fluid -->
 </nav>
 <%--导航路径--%>
-<div class="row" style="background-color: #f8f8f8;margin-top: 50px;width: 100%;margin-left:20px">
-    <ol class="breadcrumb" style="margin: 0px 0px 0px 60px">
-        <li><a href="home/1">Home</a></li>
-        <c:if test="${currentCategory!=null}">
-            <li class="active">
-                    <%--
-                                            <a href="category-articles/${currentCategory.cid}/1">${currentCategory.cname}</a>
-                    --%>
-                    ${currentCategory.cname}
+    <div id="breadcrumb-div" class="row" style="background-color: #f8f8f8;margin:50 0 0 0px;width: 100%;padding-left:8%;padding-right:8%;">
+        <ol class="breadcrumb" style="margin: 0px 0px 0px 0px">
+            <li><a href="home/1">Home</a></li>
+            <c:if test="${currentCategory!=null}">
+                <li class="active">
+                        ${currentCategory.cname}
+                </li>
 
-            </li>
+            </c:if>
+            <c:if test="${currentCategory==null}">
+                <li class="active"></li>
+            </c:if>
 
-        </c:if>
-        <c:if test="${currentCategory==null}">
-            <li class="active"></li>
-        </c:if>
-
-    </ol>
-</div>
+        </ol>
+    </div>
 </body>
 <script src="static/js/jquery-3.3.1.min.js"></script>
 <script src="static/bootstrap/js/bootstrap.min.js"></script>
@@ -136,5 +132,15 @@
         })
     })
 </script>
-
+<script>
+    var colors=new Array("#FF050E","#2FD6FF","#31FF42","#FFAD09","#FF97BD","#000000","#FF8498","#5E0EFF","#F1FF20","#B9FFD2");
+    var temp;
+    function fade_in_out(){
+        $("#fade-toggle span").fadeTo(2000,1.0);
+        $("#fade-toggle span").fadeTo(2000,0.2);
+        temp=Math.floor(Math.random()*10);
+        $("#fade-toggle span").css("color",colors[temp])
+    }
+    setInterval(fade_in_out,4200);
+</script>
 </html>

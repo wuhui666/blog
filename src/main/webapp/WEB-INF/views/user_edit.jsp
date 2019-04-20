@@ -16,7 +16,7 @@
 <%--register--%>
 <div style="margin-top: 10px">
 
-    <!-- Nav tabs -->
+
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active" style="padding-left: 40%">
             <a href="#base" aria-controls="base" role="tab" data-toggle="tab">基本修改</a>
@@ -28,12 +28,10 @@
         </li>
 
     </ul>
-
-    <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active fade in" id="base">
             <div class="row" style="margin-top: 10px">
-                <div class="col-md-5 col-md-offset-4">
+                <div class="col-md-5 col-xs-5" style="margin-left: 32%;margin-right: 32%">
                     <form id="myform" onsubmit="return no_submit()">
                         <table style="border-collapse:separate;border-spacing: 25px;border: solid 2px gainsboro">
                             <tr>
@@ -100,7 +98,7 @@
         </div>
         <div role="tabpanel" class="tab-pane fade" id="password">
             <div class="row" style="margin-top: 10px">
-                <div class="col-md-5 col-md-offset-4">
+                <div class="col-md-5 col-xs-5" style="margin-left: 32%;margin-right: 32%">
                     <form id="myform2" onsubmit="return no_submit()">
                         <table style="border-collapse:separate;border-spacing: 25px;border: solid 2px gainsboro">
                             <tr>

@@ -41,8 +41,8 @@
 <jsp:include page="../alert.jsp"/>
 <div class="row" id="loadBlock">
 
-    <div class="col-md-12" style="padding: 0 0px">
-        <div class="col-md-9" style="padding-right: 0px;padding-left: 0px">
+    <div class="col-md-12 col-xs-12" style="padding: 0 0px">
+        <div class="col-md-9 col-xs-9" style="padding-right: 0px;padding-left: 0px">
         <div id="editor">
             <c:if test="${editArticle!=null}">
                 ${editArticle.content}
@@ -51,7 +51,7 @@
         </div>
             <%-- <button id="bt">edwsfsf</button>--%>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-xs-3">
             <h2>博客保存</h2>
 
             <form>

@@ -26,10 +26,83 @@ public class PageController {
     @Autowired
     ArticleService articleService;
 
+    @RequestMapping("/")
+    public String root(Model model,HttpSession session){
+        PageInfo pageInfo=new PageInfo(articleService.getALLArticleOrderByDate(1),3);
+        model.addAttribute("articlePageInfo",pageInfo);
+        model.addAttribute("partPath","home");//页码的超链接拼接使用
+        /*hotlist*/
+        model.addAttribute("hotList", articleService.getHotArticleList());
+        /*random*/
+        List<Article> simpleArticleList= (List<Article>) session.getAttribute("simpleArticleList");
+        Article[] random=new Article[6];
+        for (int count = 0; count <random.length ;) {
+            int k= (int) (Math.random()*simpleArticleList.size());
+            Article temp=simpleArticleList.get(k);
+            int flag=0;//防重
+            if (count==0){
+                random[count]=temp;
+                ++count;
+            }
+            else {
+                for (Article aRandom : random) {
+                    if (temp.equals(aRandom)) {
+                        flag = 1;
+                        break;
+                    }
+                }
+                if (flag==0){
+                    random[count]=temp;
+                    ++count;
+
+                }
+            }
+        }
+
+        model.addAttribute("randomList", Arrays.asList(random));
+        return "home.jsp";
+    }
+
+    @RequestMapping("/test")
+    public String test(Model model,HttpSession session){
+        PageInfo pageInfo=new PageInfo(articleService.getALLArticleOrderByDate(1),3);
+        model.addAttribute("articlePageInfo",pageInfo);
+        model.addAttribute("partPath","home");//页码的超链接拼接使用
+        /*hotlist*/
+        model.addAttribute("hotList", articleService.getHotArticleList());
+        /*random*/
+        List<Article> simpleArticleList= (List<Article>) session.getAttribute("simpleArticleList");
+        Article[] random=new Article[6];
+        for (int count = 0; count <random.length ;) {
+            int k= (int) (Math.random()*simpleArticleList.size());
+            Article temp=simpleArticleList.get(k);
+            int flag=0;//防重
+            if (count==0){
+                random[count]=temp;
+                ++count;
+            }
+            else {
+                for (Article aRandom : random) {
+                    if (temp.equals(aRandom)) {
+                        flag = 1;
+                        break;
+                    }
+                }
+                if (flag==0){
+                    random[count]=temp;
+                    ++count;
+
+                }
+            }
+        }
+
+        model.addAttribute("randomList", Arrays.asList(random));
+        return "test.jsp";
+    }
+
     @RequestMapping("/home/{num}")
     public String toHomePage(HttpSession session,@PathVariable(value = "cid",required = false) Integer cid, @PathVariable(value = "num") Integer startIndex, Model model){
 
-            session.setAttribute("categoryList",categoryService.getAllCategoryWithSon());
             PageInfo pageInfo=new PageInfo(articleService.getALLArticleOrderByDate(startIndex),3);
             model.addAttribute("articlePageInfo",pageInfo);
 

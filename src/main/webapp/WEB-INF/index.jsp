@@ -9,9 +9,9 @@
     <title>The Blog Of WuHui</title>
 </head>
 <body>
-
+5555
 </body>
 <script>
-   window.location.href="${pageContext.request.contextPath}/home/1";
+   window.location.href="..";
 </script>
 </html>

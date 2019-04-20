@@ -31,6 +31,7 @@ public class PreResourcesInterceptor implements WebRequestInterceptor {
         List<Article> simpleList= (List<Article>) webRequest.getAttribute("simpleArticleList", WebRequest.SCOPE_SESSION);
         List<Category> simpleCategoryList= (List<Category>) webRequest.getAttribute("simpleArticleList", WebRequest.SCOPE_SESSION);
         Integer admin_uid= (Integer) webRequest.getAttribute("adminUid", WebRequest.SCOPE_SESSION);
+
         if (simpleCategoryList==null||simpleCategoryList.isEmpty()){
 
             webRequest.setAttribute("categoryList", categoryService.getAllCategoryWithSon(), WebRequest.SCOPE_SESSION);

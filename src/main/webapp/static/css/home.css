@@ -14,25 +14,26 @@
 
 #articleListContainer ul li{
     position: relative;
-    height: 150px;
+    height: 160px;
+    width: 100%;
     margin-top: 30px;
     border-bottom:solid #d6e9c6 2px;
 
 }
 .articleIcon{
     position: absolute;
-    left: 650px;
-    width: 200px;
-    height: 135px;
+    left: 72%;
+    width: 24%;
+    height: 160px;
 
 }
 .articleIcon img{
     width:100%;
-    height:100%;
+    height:130px;
 }
 .articleInfo{
-    width:650px;
-    height:150px;
+    width:70%;
+    height:160px;
     position: relative;
 }
 .articleInfo .articleTitle{
@@ -62,30 +63,25 @@
     position: absolute;
     left: 0px;
     top:125px;
+    width: 72%;
 }
 
 .articleMeta p{
     display: inline-block;
-    margin-right: 15px;
+    margin-right: 3%;
     font-size: large;
 }
 
 .articleMeta p .count{
     display: inline-block;
-    width: 45px;
+    width: 7%;
 }
 .articleMeta :last-child{
     font-size: smaller;
-    margin-left: 250px;
+    margin-left:6%;
     margin-right: 0px;
 }
-#hotRankingListContainer{
-    margin-right: -20px;
 
-}
-#hotRankingListContainer td{
-    padding-left: 20px;
-}
 #hotRankingListContainer td a{
     text-decoration: none;
     color: #222222;

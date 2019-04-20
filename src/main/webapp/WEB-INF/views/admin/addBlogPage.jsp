@@ -59,26 +59,26 @@
     </style>
 </head>
 <body>
-<div id="head" class="row">
-    <div class="col-md-10">
+<div id="head" class="row" style="width: 100%">
+    <div class="col-md-10 col-xs-10">
         <h1>欢迎登录!</h1>
     </div>
-    <div class="col-md-2" style="padding: 0 0px">
-        <div id="headPicture" class="col-md-6" style="padding-right: 0px;text-align: right">
+    <div class="col-md-2 col-xs-2" style="padding: 0 0px">
+        <div id="headPicture" class="col-md-6 col-xs-6" style="padding-right: 0px;text-align: right">
             <img src="${currentUser.photo}" alt="..." class="img-circle">
 
         </div>
-        <div class="col-md-6" style="padding-left: 0px">
+        <div class="col-md-6 col-xs-6" style="padding-left: 0px">
             <p style="font-size: medium">${currentUser.username}</p>
-            <a style="font-size: medium">回到前台</a>
+            <a href="home/1" style="font-size: medium;text-decoration: none">回到前台</a>
         </div>
 
     </div>
 
 </div>
 <jsp:include page="../alert.jsp"/>
-<div class="row" id="loadBlock">
-    <div class="col-md-2" style="padding-right: 0px;">
+<div class="row" id="loadBlock" style="width: 100%">
+    <div class="col-md-2 col-xs-2" style="padding-right: 0px;">
         <ul class="nav nav-pills nav-stacked">
             <li role="presentation" class="nav-li">
 
@@ -114,29 +114,32 @@
             </li>
         </ul>
     </div>
-    <div class="col-md-10" style="padding: 0 0px;">
+    <div class="col-md-10 col-xs-10" style="padding: 0 0px;">
         <div class="row">
-            <div class="col-sm-9" style="padding-right: 0px;padding-left: 0px;margin-right: 0px">
-        <div id="editor">
-            <c:if test="${editArticle!=null}">
-                ${editArticle.content}
-            </c:if>
-        </div>
+            <div class="col-md-9 col-xs-9" style="padding-right: 0px;padding-left: 0px;margin-right: 0px">
+                <div id="editor">
+                    <c:if test="${editArticle!=null}">
+                        ${editArticle.content}
+                    </c:if>
+                </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-md-3 col-xs-3">
                 <h2>博客保存</h2>
 
                 <form>
                     <div class="form-group">
                         <label id="title-label">标题</label>
                         <c:if test="${editArticle!=null}">
-                            <input  id="title" name="title" type="text" value="${editArticle.title}"/>
+                            <div class="col-md-2 col-xs-2">
+                                <input  id="title" name="title" type="text" value="${editArticle.title}"/>
+                            </div>
                         </c:if>
                         <c:if test="${editArticle==null}">
                             <input  id="title" name="title" type="text" placeholder="输入标题..."/>
                         </c:if>
 
                     </div>
+                    <%--category--%>
                     <div class="form-group" style="margin-top: 50px">
                         <label id="category-label" for="categorySelect">分类</label>
                         <select id="categorySelect" name="cid">

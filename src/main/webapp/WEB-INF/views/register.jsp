@@ -16,7 +16,7 @@
 <jsp:include page="header.jsp"/>
 <%--register--%>
  <div class="row" style="margin-top: 10px">
-        <div class="col-md-5 col-md-offset-4">
+        <div class="col-md-5 col-xs-5" style="margin-left: 32%;margin-right: 32%">
             <form onsubmit="return no_submit()" id="myform">
                 <table style="border-collapse:separate;border-spacing: 25px;border: solid 2px gainsboro">
                     <tr>

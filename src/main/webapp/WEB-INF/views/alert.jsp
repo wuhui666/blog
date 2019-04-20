@@ -12,10 +12,8 @@
 
 </head>
 <body>
-<div class='row'>
-    <div id="alert-div" class="col-md-2 col-md-offset-5">
+    <div id="alert-div" class="col-md-5 col-xs-5" style="margin-left: 32%;margin-right: 32%;margin-top: 15%;" >
         <span id='alert-span'></span>
     </div>
-</div>
 </body>
 </html>

@@ -19,11 +19,11 @@
     <jsp:include page="alert.jsp"/>
     <jsp:include page="header.jsp"/>
     <div id="contentContainer">
-        <div class="row">
+        <div class="row" style="width: 100%">
             <div class="col-md-10 col-md-offset-1" style="padding-right: 0px"><%--style="visibility: hidden"--%>
 
                 <div class="articleContainer">
-                    <h1 class="title" >${currentArticle.title}</h1>
+                    <h1 class="title" style="padding-left: 15%;padding-right: 15%">${currentArticle.title}</h1>
                     <div class="row" style="text-align: center;margin-bottom: 20px">
                         <%--作者，阅读量，评论量--%>
                         <ul id="articleInfoList">
@@ -44,10 +44,10 @@
 
 
                     <div class="row">
-                        <div class="col-md-2" style="padding-top: 5px">
+                        <div class="col-md-2 col-xs-2" style="padding-top: 5px;">
                             <p>分类：${currentArticle.categoryName}</p>
                         </div>
-                        <div class="col-md-3 col-md-offset-7">
+                        <div class="col-md-3 col-xs-3 col-md-offset-7 col-xs-offset-7">
 
                             <ul id="shareList">
                                 <li onclick="shareTo('qzone')">
@@ -112,7 +112,7 @@
                     </c:if>
                     <%--pre/next--%>
                     <div>
-                        <div class="col-md-6" style="text-align: center;border: dashed 1px gainsboro">
+                        <div class="col-md-6 col-xs-6" style="text-align: center;border: dashed 1px gainsboro">
                             <c:if test="${preArticle!=null}">
                                 <a href="article/${preArticle.aid}" style="text-decoration: none;color: grey" class="pre-next">
                                     <span class="glyphicon glyphicon-arrow-left"></span>上一篇<br>
@@ -126,7 +126,7 @@
                                 </a>
                             </c:if>
                         </div>
-                        <div class="col-md-6" style="text-align: center;border: dashed 1px gainsboro">
+                        <div class="col-md-6 col-xs-6" style="text-align: center;border: dashed 1px gainsboro">
                             <c:if test="${nextArticle!=null}">
                                 <a href="article/${nextArticle.aid}" style="text-decoration: none;color: grey" class="pre-next">
                                     <span class="glyphicon glyphicon-arrow-right"></span>下一篇<br>
@@ -154,7 +154,7 @@
                                     <div id="comment-publisher"
                                          class="row"
                                          style="padding-left: 20px;padding-right: 0px" >
-                                        <div class="col-md-1" style="margin-right: -10px">
+                                        <div class="col-md-1 col-xs-1" style="margin-right: -10px">
                                             <c:if test="${c.userPhoto!=null}">
                                                 <img src="${c.userPhoto}" class="img-circle" style="width: 40px;height: 40px;">
                                             </c:if>
@@ -195,7 +195,7 @@
                                     </div>
                                     <hr>
                                     <div class="row" id="reply-list">
-                                        <div class="col-md-11 col-md-offset-1">
+                                        <div class="col-md-11 col-md-offset-1 col-xs-11 col-xs-offset-1">
                                             <ul class="reply-ul">
                                                 <c:forEach items="${c.replyList}" var="r">
                                                     <li>
@@ -203,7 +203,7 @@
                                                                 <%--user-info--%>
                                                             <div class="row">
                                                                     <%--reply-user-photo--%>
-                                                                <div class="col-md-1" style="margin-right: -10px">
+                                                                <div class="col-md-1 col-xs-1" style="margin-right: -10px">
                                                                     <c:if test="${r.userPhoto==null}">
                                                                         <img src="static/img/user/deleted.ico" class="img-circle" style="width: 40px;height: 40px;">
                                                                     </c:if>
@@ -213,7 +213,7 @@
 
                                                                 </div>
                                                                     <%--reply-user-info--%>
-                                                                <div class="col-md-11" style="padding-left: 0px">
+                                                                <div class="col-md-11 col-xs-11" style="padding-left: 0px">
                                                                     <p style="margin-bottom: 0px;font-size: larger">
                                                                         <c:if test="${r.uid==adminUid}">
                                                                             <span class="glyphicon glyphicon-user" style="color: red"></span>

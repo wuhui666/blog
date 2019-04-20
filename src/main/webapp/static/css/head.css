@@ -1,4 +1,3 @@
-
 #mainContainer{
     width: 1230px;
     height: 1150px;
@@ -22,7 +21,7 @@
     list-style-type: none;
     text-align: center;
     background-color:#f8f8f8;
-    width: 118.5px;
+    width: 100%;
     padding-left: 0px;
 
 }
@@ -36,7 +35,7 @@
     text-decoration: none;
 }
 .menuLi ul>li ul{
-    left: 118.5px;/*相对 .menuLi ul>li*/
+    left: 100%;/*相对 .menuLi ul>li*/
     top:0px;
 }
 .menuLi ul li ul li{

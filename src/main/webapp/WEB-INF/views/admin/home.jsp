@@ -35,18 +35,18 @@
 </head>
 <body>
     <jsp:include page="../alert.jsp"/>
-    <div id="head" class="row" style="margin-right: 0px">
-        <div class="col-md-10">
+    <div id="head" class="row" style="width: 100%;">
+        <div class="col-md-10 col-xs-10">
             <h1>欢迎登录!</h1>
         </div>
-        <div class="col-md-2" style="padding: 0 0px">
-            <div id="headPicture" class="col-md-6" style="padding-right: 0px;text-align: right">
+        <div class="col-md-2 col-xs-2" style="padding: 0 0px;">
+            <div id="headPicture" class="col-md-6 col-xs-6" style="padding-right: 0px;text-align: right">
                 <img src="${pageContext.request.contextPath}/${currentUser.photo}" alt="..." class="img-circle">
 
             </div>
-            <div class="col-md-6" style="padding-left: 0px">
+            <div class="col-md-6 col-xs-6" style="padding-left: 0px">
                 <p style="font-size: medium">${currentUser.username}</p>
-                <a style="font-size: medium" href="home/1">回到前台</a>
+                <a style="font-size: medium;text-decoration: none" href="home/1">回到前台</a>
 
             </div>
 
@@ -54,8 +54,8 @@
 
     </div>
 
-    <div class="row" id="loadBlock">
-        <div class="col-md-2" style="padding-right: 0px">
+    <div class="row" id="loadBlock" style="width: 100%">
+        <div class="col-md-2 col-xs-2" style="padding-right: 0px">
             <ul class="nav nav-pills nav-stacked">
                 <li role="presentation" class="nav-li">
 
@@ -90,7 +90,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-10" style="padding: 0 0px">
+        <div class="col-md-10 col-xs-10" style="padding: 0 0px">
 
 
         </div>
