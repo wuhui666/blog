@@ -54,7 +54,12 @@
         }
         /*隐藏编辑器未授权提示*/
         .fr-wrapper > div[style*='z-index: 9999'] {
-           display: none;
+            position: absolute;
+            top: -10000px;
+            opacity: 0;
+        }
+        .fr-wrapper >div[class='fr-element fr-view'] {
+            margin-top: -30px;
         }
     </style>
 </head>
