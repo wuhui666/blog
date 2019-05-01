@@ -7,10 +7,10 @@
 <head>
     <title>Title</title>
     <base href="<%=basePath%>">
+    <link rel="shortcut icon" type="image/x-icon" href="static/img/other/logo.ico"/>
     <link href="${pageContext.request.contextPath}/static/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 
     <link href="static/css/alert.css" rel="stylesheet">
-
     <style>
         #head{
             text-align: center;
@@ -41,7 +41,7 @@
         </div>
         <div class="col-md-2 col-xs-2" style="padding: 0 0px;">
             <div id="headPicture" class="col-md-6 col-xs-6" style="padding-right: 0px;text-align: right">
-                <img src="${pageContext.request.contextPath}/${currentUser.photo}" alt="..." class="img-circle">
+                <img src="${currentUser.photo}" alt="..." class="img-circle">
 
             </div>
             <div class="col-md-6 col-xs-6" style="padding-left: 0px">

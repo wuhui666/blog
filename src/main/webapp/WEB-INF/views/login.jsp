@@ -8,6 +8,7 @@
 <head>
     <title>Title</title>
     <base href="<%=basePath%>">
+    <link rel="shortcut icon" type="image/x-icon" href="static/img/other/logo.ico"/>
     <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body>

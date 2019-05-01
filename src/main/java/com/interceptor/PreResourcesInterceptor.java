@@ -10,6 +10,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.context.request.WebRequestInterceptor;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -31,8 +33,7 @@ public class PreResourcesInterceptor implements WebRequestInterceptor {
         List<Article> simpleList= (List<Article>) webRequest.getAttribute("simpleArticleList", WebRequest.SCOPE_SESSION);
         List<Category> simpleCategoryList= (List<Category>) webRequest.getAttribute("simpleArticleList", WebRequest.SCOPE_SESSION);
         Integer admin_uid= (Integer) webRequest.getAttribute("adminUid", WebRequest.SCOPE_SESSION);
-
-        if (simpleCategoryList==null||simpleCategoryList.isEmpty()){
+         if (simpleCategoryList==null||simpleCategoryList.isEmpty()){
 
             webRequest.setAttribute("categoryList", categoryService.getAllCategoryWithSon(), WebRequest.SCOPE_SESSION);
         }
@@ -45,6 +46,7 @@ public class PreResourcesInterceptor implements WebRequestInterceptor {
         if (admin_uid==null){
             webRequest.setAttribute("adminUid",userService.getAdmin().getUid(),WebRequest.SCOPE_SESSION);
         }
+
 
     }
 

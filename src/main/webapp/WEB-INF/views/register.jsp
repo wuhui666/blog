@@ -10,6 +10,7 @@
     <base href="<%=basePath%>">
     <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="static/css/alert.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="static/img/other/logo.ico"/>
 </head>
 <body>
 <jsp:include page="alert.jsp"/>

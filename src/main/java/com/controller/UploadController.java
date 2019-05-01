@@ -37,13 +37,17 @@ public class UploadController {
 
         }
         SimpleDateFormat smf=new SimpleDateFormat("yyyyMMddHHmmss");
-        String name=smf.format(new Date())+"@"+image_name.getOriginalFilename();
-        System.out.println(name);
+        String origin=image_name.getOriginalFilename();
+        String name=smf.format(new Date())+origin.substring(origin.lastIndexOf("."), origin.length());
 
-        String url= request.getContextPath()+"/static/img/article/"+name;
+        //获取tomcat的webapp目录
+        String webapp_path = request.getSession().getServletContext().getRealPath("");
+        webapp_path= webapp_path.substring(0,webapp_path.lastIndexOf(File.separator));//别用斜杆
 
-        System.out.println(url);
-        File file=new File(request.getServletContext().getRealPath("/static/img/article"),name);
+
+        String url= "/blog_upload/img/article/"+name;
+
+        File file=new File(webapp_path+url);
         if (!file.exists()) {
            file.mkdirs();
             try {
@@ -80,16 +84,18 @@ public class UploadController {
             System.out.println("it is empty");
 
         }
-
-        System.out.println("in............");
         SimpleDateFormat smf=new SimpleDateFormat("yyyyMMddHHmmss");
-        String name=smf.format(new Date())+"@"+video_name.getOriginalFilename();
-        System.out.println(name);
+        String origin=video_name.getOriginalFilename();
+        String name=smf.format(new Date())+origin.substring(origin.lastIndexOf("."), origin.length());
 
-        String url= request.getContextPath()+"/static/videos/"+name;
+        //获取tomcat的webapp目录
+        String webapp_path = request.getSession().getServletContext().getRealPath("");
 
-        System.out.println(url);
-        File file=new File(request.getServletContext().getRealPath("/static/videos"),name);
+        webapp_path= webapp_path.substring(0,webapp_path.lastIndexOf(File.separator));
+
+        String url= "/blog_upload/video/"+name;
+
+        File file=new File(webapp_path+url);
         if (!file.exists()) {
             file.mkdirs();
             try {
@@ -100,7 +106,6 @@ public class UploadController {
         }
         HashMap<String , String> jsonMap = new HashMap<>();
         try {
-            System.out.println("try..........");
 
             video_name.transferTo(file);
 
@@ -128,13 +133,17 @@ public class UploadController {
 
 
         SimpleDateFormat smf=new SimpleDateFormat("yyyyMMddHHmmss");
-        String name=smf.format(new Date())+"@"+file_name.getOriginalFilename();
-        System.out.println(name);
+        String origin=file_name.getOriginalFilename();
+        String name=smf.format(new Date())+origin.substring(origin.lastIndexOf("."), origin.length());
 
-        String url= request.getContextPath()+"/static/files/"+name;
+        //获取tomcat的webapp目录
+        String webapp_path = request.getSession().getServletContext().getRealPath("");
 
-        System.out.println(url);
-        File file=new File(request.getServletContext().getRealPath("/static/files"),name);
+        webapp_path= webapp_path.substring(0,webapp_path.lastIndexOf(File.separator));
+
+        String url= "/blog_upload/file/"+name;
+
+        File file=new File(webapp_path+url);
         if (!file.exists()) {
             file.mkdirs();
             try {

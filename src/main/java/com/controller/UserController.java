@@ -50,10 +50,17 @@ public class UserController {
         if (!file.isEmpty()){
 
             SimpleDateFormat smf=new SimpleDateFormat("yyyyMMddHHmmss");
-            //防重
-            String name=smf.format(new Date())+"@"+file.getOriginalFilename();
+            String origin=file.getOriginalFilename();
+            String name=smf.format(new Date())+origin.substring(origin.lastIndexOf("."), origin.length());
 
-            File file_new=new File(request.getServletContext().getRealPath("/static/img/user"),name);
+            //获取tomcat的webapp目录
+            String webapp_path = request.getSession().getServletContext().getRealPath("");
+
+            webapp_path= webapp_path.substring(0,webapp_path.lastIndexOf(File.separator));
+
+            String url= "/blog_upload/img/user/"+name;
+
+            File file_new=new File(webapp_path+url);
             if (!file_new.exists()) {
                 file_new.mkdirs();
                 try {
@@ -65,7 +72,7 @@ public class UserController {
             try {
                 file.transferTo(file_new);
                 //记录头像路径
-                user.setPhoto("static/img/user/"+name);
+                user.setPhoto("/blog_upload/img/user/"+name);
 
             } catch (IOException e) {
                 System.out.println("io exception");
@@ -141,9 +148,14 @@ public class UserController {
         if (multipartFile!=null&&!multipartFile.isEmpty()){
 
             SimpleDateFormat smf=new SimpleDateFormat("yyyyMMddHHmmss");
-            String name=smf.format(new Date())+"@"+multipartFile.getOriginalFilename();
-
-            File file=new File(request.getServletContext().getRealPath("/static/img/user/"),name);
+            String origin=multipartFile.getOriginalFilename();
+            String name=smf.format(new Date())+origin.substring(origin.lastIndexOf("."), origin.length());
+            //获取tomcat的webapp目录
+            String webapp_path = request.getSession().getServletContext().getRealPath("");
+            webapp_path= webapp_path.substring(0,webapp_path.lastIndexOf(File.separator));
+            System.out.println(webapp_path);
+            String url= "/blog_upload/img/user/"+name;
+            File file=new File(webapp_path+url);
             if (!file.exists()) {
                 file.mkdirs();
                 try {
@@ -153,15 +165,18 @@ public class UserController {
                 }
             }
             try {
-                System.out.println("try..........");
+
                 multipartFile.transferTo(file);
-                user.setPhoto("static/img/user/"+name);
+                user.setPhoto("/blog_upload/img/user/"+name);
+
             } catch (IOException e) {
                 System.out.println("io exception");
                 e.printStackTrace();
             }
         }
+
         userService.updateUserSective(user);
+
         request.getSession().setAttribute("currentUser", userService.getUserByUid(user.getUid()));
         return JSON.toJSONString("hhhhhhh");
     }

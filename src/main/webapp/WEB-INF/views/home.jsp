@@ -2,6 +2,10 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    if (request.getSession().getAttribute("webapp_path")==null){
+        request.getSession().setAttribute("webapp_path",request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort());
+    }
+
 %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -10,6 +14,7 @@
 <head>
     <title>The Blog Of WuHui</title>
     <base href="<%=basePath%>">
+    <link rel="shortcut icon" type="image/x-icon" href="static/img/other/logo.ico"/>
     <link rel="stylesheet" href="static/css/home.css">
     <link href="static/css/calender.css" rel="stylesheet">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_234130_nem7eskcrkpdgqfr.css">
@@ -40,7 +45,7 @@
                    </ol>
                    <!-- Wrapper for slides -->
                    <div class="carousel-inner" role="listbox">
-                       <div class="item active" style="background-image: url('${pageContext.request.contextPath}/static/img/carousel/1.jpg')">
+                       <div class="item active" style="background-image: url('${sessionScope.webapp_path}/blog_upload/img/carousel/1.jpg')">
                            <%-- <img src="static/img/1.jpg" alt="...">--%>
                            <div class="carousel-caption">
                                 <span style="font-size: large;font-weight: bold;color: #d9534f">
@@ -48,7 +53,7 @@
                                 </span>
                            </div>
                        </div>
-                       <div class="item" style="background-image: url('${pageContext.request.contextPath}/static/img/carousel/go.jpg')">
+                       <div class="item" style="background-image: url('${sessionScope.webapp_path}/blog_upload/img/carousel/2.jpg')">
                            <%-- <img src="static/img/2.jpg" alt="...">--%>
                            <div class="carousel-caption">
                                 <span style="font-size: large;font-weight: bold;color: #d9534f">
@@ -56,7 +61,7 @@
                                 </span>
                            </div>
                        </div>
-                       <div class="item" style="background-image: url('${pageContext.request.contextPath}/static/img/carousel/stay.jpg')">
+                       <div class="item" style="background-image: url('${sessionScope.webapp_path}/blog_upload/img/carousel/3.jpg')">
                            <%--<img src="static/img/3.jpg" alt="...">--%>
                            <div class="carousel-caption">
                                 <span style="font-size: large;font-weight: bold;color: #d9534f">
@@ -64,7 +69,7 @@
                                 </span>
                            </div>
                        </div>
-                       <div class="item" style="background-image: url('${pageContext.request.contextPath}/static/img/carousel/over.jpg')">
+                       <div class="item" style="background-image: url('${sessionScope.webapp_path}/blog_upload/img/carousel/4.jpg')">
                            <%--<img src="static/img/3.jpg" alt="...">--%>
                            <div class="carousel-caption">
                                <span style="font-size: large;font-weight: bold;color: #d9534f">
@@ -86,70 +91,63 @@
                <div id="articleListContainer">
                    <%--文章--%>
                    <ul>
-                       <c:forEach items="${articlePageInfo.list}" var="a">
+                       <c:forEach items="${articlePageInfo.list}" var="a" varStatus="st">
                            <li>
                                <a class="articleIcon" href="article/${a.aid}">
-                                   <img src="static/img/random/p.jpg">
+                                   <img src=""/>
                                </a>
                                <div class="articleInfo">
                                    <a class="articleTitle" href="article/${a.aid}" style="border-left:solid 15px green;padding-left: 10px">
-                                           ${a.title}
+                                           <c:if test="${fn:length(a.title)>=27}">
+                                               ${fn:substring(a.title,0,27)}...
+                                           </c:if>
+                                            <c:if test="${fn:length(a.title)<27}">
+                                               ${a.title}
+                                           </c:if>
                                    </a>
-                                   <a class="articleAbstract" href="article/${a.aid}">
-
-
-                                       <c:set var="real_content" value="${fn:trim(a.content)}"/>
-                                       <c:if test="${fn:contains(real_content,'<img' )}">
-                                           <c:set var="content" value="${fn:substringBefore(real_content, '<img')}"/>
-
-                                           <%--第一张图片之前文字--%>
-                                           <c:if test="${fn:length(content)>100}">
-                                               ${fn:substring(content,0,100)}...
-
-                                           </c:if>
-                                           <c:if test="${fn:length(content)<=100}">
-                                               ${content}...
-                                           </c:if>
-                                       </c:if>
-                                       <c:if test="${fn:contains(real_content,'<img' )==false}">
-
-                                           <c:if test="${fn:length(real_content)>100}">
-                                               ${fn:substring(real_content,0,100)}...
-                                           </c:if>
-                                           <c:if test="${fn:length(real_content)<=100}">
-                                               ${real_content}...
-                                           </c:if>
-                                       </c:if>
-
-
-                                   </a>
+                                   <div class="articleAbstract">
+                                       <span>
+                                           "${abstractList.get(st.index)}..."
+                                           <%--加引号防止提取的文字含html标签引起布局混乱--%>
+                                       </span>
+                                   </div>
 
                                </div>
-                               <div class="articleMeta" style="">
-                                   <p>
-                                       <span class="glyphicon glyphicon-eye-open"></span>
-                                       <span style="margin-left: auto" class="count">${a.viewCount}</span>
-                                   </p>
-                                   <p>
-                                       <span class="glyphicon glyphicon-comment"></span>
-                                       <span style="margin-left: auto" class="count">${a.commentCount}</span>
-                                   </p>
-                                   <p>
-                                       <span class="glyphicon glyphicon-time"></span>
-                                       <span style="margin-left: auto">
-                                                         <fmt:formatDate value="${a.createTime}" pattern="yyyy年MM月dd日 HH时mm分"/>
-                                                 </span>
+                               <div class="articleMeta" style="width: 100%;top: 135px">
+                                   <div class="row" style="margin-left: 0px;">
+                                       <div class="col-md-1 col-xs-1" style="padding: 0 0px">
+                                           <p style="width: 100%;margin-bottom: 0px">
+                                               <span class="glyphicon glyphicon-eye-open"></span>
+                                               <span class="count">${a.viewCount}</span>
+                                           </p>
+                                       </div>
+                                       <div class="col-md-1 col-xs-1" style="padding: 0 0px">
+                                           <p style="margin-bottom: 0px">
+                                               <span class="glyphicon glyphicon-comment"></span>
+                                               <span  class="count">${a.commentCount}</span>
+                                           </p>
+                                       </div>
+                                       <div class="col-md-4 col-xs-4" style="text-align: left">
+                                           <p style="width: 100%;margin-bottom: 0px">
+                                               <span class="glyphicon glyphicon-time"></span>
+                                               <span style="font-size: medium;">
+                                                   <fmt:formatDate value="${a.createTime}" pattern="yyyy/MM/dd HH:mm"/>
+                                               </span>
 
-                                   </p>
-                                   <p>
-                                                <span style="margin-left: 0px;">
+                                           </p>
+                                       </div>
+                                       <div class="col-md-4 col-xs-6" style="text-align: left;margin-left:-5%">
+                                           <p style="margin-right: 20%;margin-bottom: 0px">
+                                                <span>
                                                     所属分类:
-                                                    <span class="label label-warning" style="margin-left: 0px;font-size: larger">
-                                                            ${a.categoryName}
-                                                    </span>
-
                                                 </span>
-                                   </p>
+                                               <span class="label label-warning" style="margin-left: 0px;font-size: smaller">
+                                                       ${a.categoryName}
+                                               </span>
+                                           </p>
+                                       </div>
+                                   </div>
+
 
                                </div>
                            </li>
@@ -234,13 +232,13 @@
                                        <a href="article/${a.aid}"><span style="font-size: large;color: red;font-weight: bold">${st.count}</span><span>&nbsp;&nbsp;${a.title}</span></a>
                                    </c:if>
                                    <c:if test="${st.count==2}">
-                                       <a href="article/${a.aid}"><span style="font-size: larger;color: silver;font-weight: bolder">${st.index}</span><span>&nbsp;&nbsp;${a.title}</span></a>
+                                       <a href="article/${a.aid}"><span style="font-size: larger;color: silver;font-weight: bolder">${st.count}</span><span>&nbsp;&nbsp;${a.title}</span></a>
                                    </c:if>
                                    <c:if test="${st.count==3}">
-                                       <a href="article/${a.aid}"><span style="color: orange;">${st.index}</span><span>&nbsp;&nbsp;${a.title}</span></a>
+                                       <a href="article/${a.aid}"><span style="color: orange;">${st.count}</span><span>&nbsp;&nbsp;${a.title}</span></a>
                                    </c:if>
                                    <c:if test="${st.count>3}">
-                                       <a href="article/${a.aid}"><span style="font-size: smaller">${st.index}</span><span>&nbsp;&nbsp;${a.title}</span></a>
+                                       <a href="article/${a.aid}"><span style="font-size: smaller">${st.count}</span><span>&nbsp;&nbsp;${a.title}</span></a>
                                    </c:if>
                                </td>
                            </tr>
@@ -260,7 +258,7 @@
                    <div class="random-article-row" style="margin-bottom: 3%;">
                        <div class="row" style="margin-bottom: 3%;">
                            <div class="col-md-4 col-xs-4" style="padding-right: 0px;width: 40%;">
-                               <a class="left_random" href="article/${r.aid}"><img src="static/img/1.jpg" style="width: 100%;height:80px;"></a>
+                               <a class="left_random" href="article/${r.aid}"><img src="" style="width: 100%;height:80px;"></a>
                            </div>
                            <div class="col-md-8 col-xs-8" style="padding-bottom: 10%;padding-top: 10%;padding-left: 6%;width: 50%">
                                <a href="article/${r.aid}" style="color: black;font-size:1em">
@@ -290,4 +288,7 @@
 <script src="static/js/schedule.js"></script>
 <script src="static/js/calender-init.js"></script>
 <script src="static/js/home.js"></script>
+<script>
+
+</script>
 </html>

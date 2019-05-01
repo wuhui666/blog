@@ -62,24 +62,8 @@
 .articleMeta{
     position: absolute;
     left: 0px;
-    top:125px;
-    width: 72%;
-}
-
-.articleMeta p{
-    display: inline-block;
-    margin-right: 3%;
-    font-size: large;
-}
-
-.articleMeta p .count{
-    display: inline-block;
-    width: 7%;
-}
-.articleMeta :last-child{
-    font-size: smaller;
-    margin-left:6%;
-    margin-right: 0px;
+    top:135px;
+    width: 100%;
 }
 
 #hotRankingListContainer td a{

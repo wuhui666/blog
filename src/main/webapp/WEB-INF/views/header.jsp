@@ -10,6 +10,7 @@
     <base href="<%=basePath%>">
     <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="static/css/head.css">
+
 </head>
 <body>
 <%--菜单栏--%>
@@ -73,7 +74,7 @@
                         </ul>
                     </c:if>
                     <c:if test="${currentUser==null}">
-                        <a href="#">个人中心</a>
+                        <a>个人中心</a>
                         <ul>
                             <li><a class="keepUrlbBeforeLogin">登录</a></li>
                             <li><a href="register">注册</a></li>

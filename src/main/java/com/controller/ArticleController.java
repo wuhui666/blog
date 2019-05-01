@@ -7,12 +7,15 @@ import com.service.ArticleService;
 import com.service.CategoryService;
 import com.service.CommentService;
 import com.service.UserService;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -43,6 +46,19 @@ public class ArticleController {
         if (articleList!=null){
             PageInfo pageInfo=new PageInfo(articleList,3);
             model.addAttribute("articlePageInfo",pageInfo);
+            /*article abstract*/
+            List<String> abstractList=new ArrayList<>(pageInfo.getList().size());
+            Document document;
+            String realText;
+            for (Article a:(List<Article>)pageInfo.getList()){
+                document= Jsoup.parse(a.getContent());
+                realText=document.body().text();
+                if (realText.length()>140){
+                    realText=realText.substring(0,140);
+                }
+                abstractList.add(realText);
+            }
+            model.addAttribute("abstractList", abstractList);
             //供页码超链接拼接
             model.addAttribute("partPath", "category-articles/"+cid);
             model.addAttribute("currentCategory",categoryService.getCategoryByCid(cid));

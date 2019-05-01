@@ -13,6 +13,7 @@
     <base href="<%=basePath%>">
     <link rel="stylesheet" href="static/css/detail.css">
     <link rel="stylesheet" href="static/css/alert.css">
+    <link rel="shortcut icon" type="image/x-icon" href="static/img/other/logo.ico"/>
 
 </head>
 <body>
